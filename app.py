@@ -4,9 +4,6 @@ import pandas as pd
 import requests
 import os
 import gdown
-API_KEY = "479916d10972f80eeeee140a1ad3b701"
-MOVIE_DICT_ID = "1LiCe2ZG552tjBztNSHRBtBKSkOdQUaEQ"
-SIMILARITY_ID = "1O8daZuVfRh8vUukVWdyS23NPghrj2kbd"
 
 # Access secrets safely with default None
 API_KEY = st.secrets.get("API_KEY")
