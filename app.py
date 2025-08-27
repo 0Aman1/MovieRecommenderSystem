@@ -10,10 +10,6 @@ API_KEY = st.secrets.get("API_KEY")
 MOVIE_DICT_ID = st.secrets.get("MOVIE_DICT_ID")
 SIMILARITY_ID = st.secrets.get("SIMILARITY_ID")
 
-# Verify all required secrets are present
-if not all([API_KEY, MOVIE_DICT_ID, SIMILARITY_ID]):
-    st.error("Missing required secrets. Please set API_KEY, MOVIE_DICT_ID, and SIMILARITY_ID in Streamlit Cloud Secrets.")
-    st.stop()
 
 # Function to download files if missing, with correct Google Drive URL format
 def download_if_missing(file_id, output_name):
