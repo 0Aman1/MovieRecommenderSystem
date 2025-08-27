@@ -2,9 +2,23 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import os
+import gdown
 
 # 🔑 Your TMDb API key
 API_KEY = "479916d10972f80eeeee140a1ad3b701"
+#Google Drive file ID for the model files
+MOVIE_DICT_ID = "1LiCe2ZG552tjBztNSHRBtBKSkOdQUaEQ"
+SIMILARITY_ID = "1O8daZuVfRh8vUukVWdyS23NPghrj2kbd"
+
+def download_if_missing(file_id, output_name):
+    if not os.path.exists(output_name):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output_name, quiet=False)
+
+# Download files only if they're not already present
+download_if_missing(SIMILARITY_ID, "similarity.pkl")
+download_if_missing(MOVIE_DICT_ID, "movie_dict.pkl")
 
 # Function to fetch poster, overview, and rating from TMDb
 def fetch_movie_details(movie_id):
