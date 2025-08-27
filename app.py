@@ -4,12 +4,20 @@ import pandas as pd
 import requests
 import os
 import gdown
+from dotenv import load_dotenv
 
-# 🔑 Your TMDb API key
-API_KEY = "479916d10972f80eeeee140a1ad3b701"
-#Google Drive file ID for the model files
-MOVIE_DICT_ID = "1LiCe2ZG552tjBztNSHRBtBKSkOdQUaEQ"
-SIMILARITY_ID = "1O8daZuVfRh8vUukVWdyS23NPghrj2kbd"
+# Load environment variables
+load_dotenv()
+
+# Get environment variables
+API_KEY = os.getenv('API_KEY')
+MOVIE_DICT_ID = os.getenv('MOVIE_DICT_ID')
+SIMILARITY_ID = os.getenv('SIMILARITY_ID')
+
+# Verify environment variables
+if not all([API_KEY, MOVIE_DICT_ID, SIMILARITY_ID]):
+    st.error("Missing required environment variables. Please check your .env file.")
+
 
 def download_if_missing(file_id, output_name):
     if not os.path.exists(output_name):
