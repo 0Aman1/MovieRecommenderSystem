@@ -1,0 +1,10 @@
+# Ignore big files
+*.pkl
+*.zip
+*.csv
+archive/
+
+# Python stuff
+venv/
+__pycache__/
+*.pyc
