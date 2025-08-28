@@ -1,7 +1,7 @@
 # 🎬 Movie Recommender System
 
 A content-based movie recommendation system that suggests similar movies based on your selection. The system uses TMDB (The Movie Database) data and provides movie recommendations along with their posters.
-
+Hosted on HuggingFace https://huggingface.co/spaces/0UNknowN1/MovieRecommendation-aman
 ## Features
 
 - Interactive web interface built with Streamlit
