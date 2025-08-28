@@ -5,10 +5,10 @@ import requests
 import os
 import gdown
 
-# Access secrets safely with default None
-API_KEY = st.secrets.get("API_KEY")
-MOVIE_DICT_ID = st.secrets.get("MOVIE_DICT_ID")
-SIMILARITY_ID = st.secrets.get("SIMILARITY_ID")
+# Access secrets from environment variables
+API_KEY = os.environ.get("API_KEY")
+MOVIE_DICT_ID = os.environ.get("MOVIE_DICT_ID")
+SIMILARITY_ID = os.environ.get("SIMILARITY_ID")
 
 # Show debug info temporarily to verify secrets (remove/comment in production)
 st.write("API_KEY:", "Set" if API_KEY else "Missing")
@@ -17,7 +17,7 @@ st.write("SIMILARITY_ID:", "Set" if SIMILARITY_ID else "Missing")
 
 # Stop execution if secrets missing
 if not all([API_KEY, MOVIE_DICT_ID, SIMILARITY_ID]):
-    st.error("Missing required secrets. Please add API_KEY, MOVIE_DICT_ID, and SIMILARITY_ID in Streamlit Cloud Secrets.")
+    st.error("Missing required secrets. Please add API_KEY, MOVIE_DICT_ID, and SIMILARITY_ID as environment variables in Render.")
     st.stop()
 
 def download_if_missing(file_id, output_name):
@@ -50,7 +50,6 @@ def recommend(movie_title):
     movie_index = movies_list[movies_list['title'] == movie_title].index[0]
     distances = similarity[movie_index]
     movies_indices = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
-
     recommended_movies = []
     recommended_posters = []
     recommended_ratings = []
@@ -59,11 +58,9 @@ def recommend(movie_title):
         movie_id = movies_list.iloc[i[0]].movie_id
         title = movies_list.iloc[i[0]].title
         poster, _, rating = fetch_movie_details(movie_id)
-
         recommended_movies.append(title)
         recommended_posters.append(poster)
         recommended_ratings.append(rating)
-
     return recommended_movies, recommended_posters, recommended_ratings
 
 st.set_page_config(page_title="Movie Recommender", layout="wide")
